@@ -19,4 +19,5 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/manor', 'ManorController@index')->name('manor');
+Route::get('/manor/index', 'ManorController@index');
+Route::post('/manor/index-data', 'ManorController@indexData');
