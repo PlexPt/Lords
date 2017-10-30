@@ -15,6 +15,7 @@ class CreateSystemTable extends Migration
     {
         Schema::create('system', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('version', 20);
             $table->timestamps();
         });
     }
