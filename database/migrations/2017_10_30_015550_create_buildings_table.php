@@ -13,14 +13,13 @@ class CreateBuildingTable extends Migration
      */
     public function up()
     {
-        Schema::create('building', function (Blueprint $table) {
+        Schema::create('buildings', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('manorId');
-            $table->unsignedTinyInteger('xAxis'); # Building Map
-            $table->unsignedTinyInteger('yAxis'); # Building Map
+            $table->unsignedTinyInteger('xAxis'); # building map
+            $table->unsignedTinyInteger('yAxis'); # building map
 
             $table->unsignedSmallInteger('buildId');
-            $table->smallInteger('number');
 
             $table->timestamps();
         });

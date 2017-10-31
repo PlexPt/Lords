@@ -13,23 +13,23 @@ class CreateManorTable extends Migration
      */
     public function up()
     {
-        Schema::create('manor', function (Blueprint $table) {
+        Schema::create('manors', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedSmallInteger('xAxis'); # World Map
             $table->unsignedSmallInteger('yAxis'); # World Map
 
-            $table->unsignedBigInteger('people');
-            $table->unsignedSmallInteger('attitude');
-            $table->float('tax', 3, 2);
+            $table->unsignedBigInteger('people')->default(3);
+            $table->unsignedSmallInteger('attitude')->default(5000); # max length is: 9999
+            $table->float('tax', 3, 2)->default(0.05);
 
-            $table->bigInteger('food');
-            $table->integer('foodYields');
+            $table->bigInteger('food')->default(0);
+            $table->integer('foodYields')->default(0);
 
-            $table->bigInteger('wood');
-            $table->integer('woodYields');
+            $table->bigInteger('wood')->default(0);
+            $table->integer('woodYields')->default(0);
 
-            $table->bigInteger('stone');
-            $table->integer('stoneYields');
+            $table->bigInteger('stone')->default(0);
+            $table->integer('stoneYields')->default(0);
 
             $table->timestamps();
         });
