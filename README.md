@@ -28,3 +28,14 @@
 ### TBD...
 
 林林总总，持续更新
+
+## 技术选型
+
+### 前端
+
+Package: NPM
+JS: Vue
+AJAX: Axios
+CSS: Sass
+UI: Element
+Publish: Webpack

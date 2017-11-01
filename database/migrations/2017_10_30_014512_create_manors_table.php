@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateManorTable extends Migration
+class CreateManorsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -20,7 +20,7 @@ class CreateManorTable extends Migration
 
             $table->unsignedBigInteger('people')->default(3);
             $table->unsignedSmallInteger('attitude')->default(5000); # max length is: 9999
-            $table->float('tax', 3, 2)->default(0.05);
+            $table->float('tax', 3, 2)->default(0.00);
 
             $table->bigInteger('food')->default(0);
             $table->integer('foodYields')->default(0);
