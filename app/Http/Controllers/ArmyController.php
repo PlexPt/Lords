@@ -10,10 +10,11 @@ namespace App\Http\Controllers;
 use App\Building;
 use App\Manor;
 use App\System;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
 
-class ManorController extends Controller {
+class ArmyController extends Controller {
     /**
      * ManorController constructor.
      *
@@ -26,22 +27,35 @@ class ManorController extends Controller {
     }
 
     /**
-     * 领地概览静态
+     * 领地军队 静态
      */
-    public function manor() {
+    public function index() {
         return view('manor');
     }
 
     /**
-     * 领地概览数据
+     * 领地军队 数据
      */
-    public function manorData($xAxis, $yAxis) {
-        $data = Manor::where([
+    public function indexData($manorId) {
+        $data = Building::where([
             ['userId', Auth::id()],
-            ['xAxis', $xAxis],
-            ['yAxis', $yAxis]
+            ['manorId', $manorId]
         ])->get();
 
         return $data;
+    }
+
+    /**
+     * 雇佣一定数量的特定军种
+     */
+    public function employ(Request $request) {
+        $manorId = Input::get('manorId');
+    }
+
+    /**
+     * 解雇一定数量的特定军种
+     */
+    public function dismiss(Request $request) {
+        $manorId = Input::get('manorId');
     }
 }

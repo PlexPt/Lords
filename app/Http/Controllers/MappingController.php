@@ -10,10 +10,11 @@ namespace App\Http\Controllers;
 use App\Building;
 use App\Manor;
 use App\System;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
 
-class ManorController extends Controller {
+class MappingController extends Controller {
     /**
      * ManorController constructor.
      *
@@ -26,22 +27,35 @@ class ManorController extends Controller {
     }
 
     /**
-     * 领地概览静态
+     * 地图 静态
      */
-    public function manor() {
+    public function index() {
         return view('manor');
     }
 
     /**
-     * 领地概览数据
+     * 地图 数据
      */
-    public function manorData($xAxis, $yAxis) {
-        $data = Manor::where([
+    public function indexData($manorId) {
+        $data = Building::where([
             ['userId', Auth::id()],
-            ['xAxis', $xAxis],
-            ['yAxis', $yAxis]
+            ['manorId', $manorId]
         ])->get();
 
         return $data;
+    }
+
+    /**
+     * 入侵某块领地
+     */
+    public function assault(Request $request) {
+        $manorId = Input::get('manorId');
+    }
+
+    /**
+     * 支援某块领地
+     */
+    public function support(Request $request) {
+        $manorId = Input::get('manorId');
     }
 }

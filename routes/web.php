@@ -14,8 +14,9 @@
 /* 首页，登录注册、展示当前系统数据 */
 Route::get('/', 'OutsideController@index');
 Route::get('/index', 'OutsideController@index');
-Route::get('/login', 'OutsideController@login');
-Route::get('/register', 'OutsideController@register');
+Route::post('/index-data', 'OutsideController@indexData');
+Route::post('/login', 'OutsideController@login');
+Route::post('/register', 'OutsideController@register');
 
 /* 领地，展示所有领地的基本资料 */
 Route::get('/manor/index', 'ManorController@index');
@@ -39,4 +40,4 @@ Route::post('/mapping/world-data/{xAxis}/{yAxis}', 'MappingController@indexData'
 Route::post('/mapping/assault', 'MappingController@assault');
 Route::post('/mapping/support', 'MappingController@support');
 
-Auth::routes();
+//Auth::routes();
