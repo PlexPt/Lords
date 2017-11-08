@@ -14,15 +14,11 @@ use Faker\Factory as Factory;
 |
 */
 
-$factory->define(App\User::class, function (Faker $faker) {
-    static $password;
+$factory->define(App\Army::class, function (Faker $faker) {
     $faker = Factory::create('zh_CN');
 
     return [
         'name' => $faker->word,
         'nickname' => $faker->name,
-        'email' => $faker->unique()->safeEmail,
-        'password' => $password ?: $password = bcrypt('secret'),
-        'remember_token' => str_random(10),
     ];
 });
