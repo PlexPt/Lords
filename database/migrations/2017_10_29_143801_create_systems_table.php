@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateSystemTable extends Migration
+class CreateSystemsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateSystemTable extends Migration
      */
     public function up()
     {
-        Schema::create('system', function (Blueprint $table) {
+        Schema::create('systems', function (Blueprint $table) {
             $table->increments('id');
             $table->string('version', 20);
             $table->timestamps();
@@ -27,6 +27,6 @@ class CreateSystemTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('system');
+        Schema::dropIfExists('systems');
     }
 }

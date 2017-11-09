@@ -15,6 +15,7 @@ class CreateManorsTable extends Migration
     {
         Schema::create('manors', function (Blueprint $table) {
             $table->increments('id');
+            $table->unsignedInteger('userId');
             $table->unsignedSmallInteger('xAxis'); # World Map
             $table->unsignedSmallInteger('yAxis'); # World Map
 
@@ -42,6 +43,6 @@ class CreateManorsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('manor');
+        Schema::dropIfExists('manors');
     }
 }

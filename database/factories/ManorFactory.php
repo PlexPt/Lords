@@ -1,7 +1,6 @@
 <?php
 
 use Faker\Generator as Faker;
-use Faker\Factory as Factory;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,10 +14,8 @@ use Faker\Factory as Factory;
 */
 
 $factory->define(App\Manor::class, function (Faker $faker) {
-    $faker = Factory::create('zh_CN');
-
     return [
-        'name' => $faker->word,
-        'nickname' => $faker->name,
+        'xAxis' => $faker->numberBetween(0,100),
+        'yAxis' => $faker->numberBetween(0,100),
     ];
 });
