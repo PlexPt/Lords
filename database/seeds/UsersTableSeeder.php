@@ -11,8 +11,16 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\User::class, 30)->create()->each(function (\App\User $u) {
-            $u->posts()->save(factory(App\Manor::class)->make());
-        });
+        $_COOKIE['time'] = 0;
+
+        factory(App\User::class, 30)
+            ->create()
+            ->each(
+                function ($u) {
+                    $_COOKIE['time'] = $u->id;
+                    $u->resources()->save( factory(App\Resource::class)->make() );
+                    $u->buildings()->save( factory(App\Building::class)->make() );
+                }
+            );
     }
 }

@@ -1,7 +1,6 @@
 <?php
 
 use Faker\Generator as Faker;
-use Faker\Factory as Factory;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,10 +14,10 @@ use Faker\Factory as Factory;
 */
 
 $factory->define(App\Building::class, function (Faker $faker) {
-    $faker = Factory::create('zh_CN');
+    $map = \App\Map::find($_COOKIE['time']*5);
 
     return [
-        'name' => $faker->word,
-        'nickname' => $faker->name,
+        'userId' => $_COOKIE['time'],
+        'mapId' => $map->id,
     ];
 });

@@ -1,7 +1,6 @@
 <?php
 
 use Faker\Generator as Faker;
-use Faker\Factory as Factory;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,13 +15,15 @@ use Faker\Factory as Factory;
 
 $factory->define(App\User::class, function (Faker $faker) {
     static $password;
-    $faker = Factory::create('zh_CN');
 
     return [
-        'name' => $faker->word,
         'nickname' => $faker->name,
         'email' => $faker->unique()->safeEmail,
+        'phone' => $faker->numberBetween(110, 179) . $faker->numberBetween(1000, 9999) . $faker->numberBetween(1000, 9999),
         'password' => $password ?: $password = bcrypt('secret'),
+        'gender' => $faker->numberBetween(0, 2),
+        'countryId' => $faker->numberBetween(1, 3),
+        'religionId' => $faker->numberBetween(1, 2),
         'remember_token' => str_random(10),
     ];
 });

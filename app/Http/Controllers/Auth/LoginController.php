@@ -4,6 +4,9 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Support\Arr;
+use phpDocumentor\Reflection\Types\Integer;
+use PhpParser\Node\Expr\Array_;
 
 class LoginController extends Controller
 {
@@ -25,7 +28,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/manor/index';
+//    protected $redirectTo = '/home';
 
     /**
      * Create a new controller instance.

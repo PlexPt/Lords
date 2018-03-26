@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Laravel'),
+    'name' => env('APP_NAME', '领主 - Lords'),
 
     /*
     |--------------------------------------------------------------------------
@@ -92,6 +92,20 @@ return [
     */
 
     'fallback_locale' => 'en',
+
+    /*
+     * Faker Class's language.
+     */
+
+    'faker_locale' => 'zh_CN',
+
+    /*
+     * Netease SMS send system's primary key.
+     */
+
+    'sms_app_key' => '00000000000000000000000000000000000',
+
+    'sms_app_secret' => '00000000000',
 
     /*
     |--------------------------------------------------------------------------

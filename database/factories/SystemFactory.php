@@ -1,7 +1,6 @@
 <?php
 
 use Faker\Generator as Faker;
-use Faker\Factory as Factory;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,11 +13,8 @@ use Faker\Factory as Factory;
 |
 */
 
-$factory->define(App\Army::class, function (Faker $faker) {
-    $faker = Factory::create('zh_CN');
-
+$factory->define(App\System::class, function (Faker $faker) {
     return [
-        'name' => $faker->word,
-        'nickname' => $faker->name,
+        'category' => $faker->name,
     ];
 });

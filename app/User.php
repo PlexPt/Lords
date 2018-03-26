@@ -15,7 +15,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'nickname'
+        'nickname', 'email', 'password',
     ];
 
     /**
@@ -27,7 +27,13 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    function posts() {
-        return $this->hasOne('App\Manor', 'userId');
+    public function resources()
+    {
+        return $this->hasOne('App\Resource', 'userId', 'id');
+    }
+
+    public function buildings()
+    {
+        return $this->hasOne('App\Building', 'userId', 'id');
     }
 }

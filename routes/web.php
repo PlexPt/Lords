@@ -11,35 +11,19 @@
 |
 */
 
-/* 首页，登录注册、展示当前系统数据 */
-Route::get('/', 'OutsideController@index');
-Route::get('/index', 'OutsideController@index');
-Route::post('/index-data', 'OutsideController@indexData');
-Route::post('/login', 'OutsideController@login');
-Route::post('/register', 'OutsideController@register');
+Route::get('/', function () {
+    return view('welcome');
+});
 
-/* 领地，展示所有领地的基本资料 */
-Route::get('/manor/index', 'ManorController@index');
-Route::post('/manor/index-data', 'ManorController@indexData');
+Auth::routes(); // 登录\注册\找回密码
 
-/* 建筑，展示某个领地上存在的建筑物（及其摆放） */
-Route::get('/manor/building', 'BuildController@index');
-Route::post('/manor/building-data/{id}', 'BuildController@indexData');
-Route::post('/manor/build', 'BuildController@build');
-Route::post('/manor/demolish', 'BuildController@demolish');
+Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/register/data', 'HomeController@registerInfo'); // 0.1
+Route::post('/user/info', 'UserController@getUserInfo'); // 0.1
 
-/* 军队，展示驻扎在每个领地的每支军队 */
-Route::get('/manor/army', 'ArmyController@index');
-Route::post('/manor/army-data/{id}', 'ArmyController@indexData');
-Route::post('/manor/employ', 'ArmyController@employ');
-Route::post('/manor/dismiss', 'ArmyController@dismiss');
+Route::post('/lord/policy', 'LordController@policy'); // 0.1
 
-/* 地图，入侵支援、展示全局地图 */
-Route::get('/mapping/world', 'MappingController@index');
-Route::post('/mapping/world-data', 'MappingController@indexData');
-Route::get('/mapping/local', 'MappingController@local');
-Route::post('/mapping/local-data/{xAxis}/{yAxis}', 'MappingController@localData');
-Route::post('/mapping/assault', 'MappingController@assault');
-Route::post('/mapping/support', 'MappingController@support');
-
-//Auth::routes();
+Route::get('/building/list', 'BuildingController@buildingList'); // 0.1
+Route::post('/building/detail', 'BuildingController@detail'); // 0.1
+Route::post('/building/build', 'BuildingController@build'); // 0.1
+Route::post('/building/demolish', 'BuildingController@demolish'); // 0.1
