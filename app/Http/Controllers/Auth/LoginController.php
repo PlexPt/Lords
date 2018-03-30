@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Services\ResourceService;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Arr;
 use phpDocumentor\Reflection\Types\Integer;
@@ -23,6 +24,8 @@ class LoginController extends Controller
 
     use AuthenticatesUsers;
 
+    protected $resourceService;
+
     /**
      * Where to redirect users after login.
      *
@@ -32,11 +35,11 @@ class LoginController extends Controller
 
     /**
      * Create a new controller instance.
-     *
-     * @return void
+     * @param ResourceService $resourceService
      */
-    public function __construct()
+    public function __construct(ResourceService $resourceService)
     {
         $this->middleware('guest')->except('logout');
+        $this->resourceService = $resourceService;
     }
 }

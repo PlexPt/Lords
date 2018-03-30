@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\DB;
 class ResourceService
 {
     const TIME_RATE = 3; # 3(Game):1(Real)
+    const FERTILITY_RATE = 0.03; # 100(Human):3(Baby)
 
     /**
      * 资源自增
@@ -28,19 +29,29 @@ class ResourceService
         DB::beginTransaction();
         try {
             // 查询用户资源
-            $resourcesModel = Resource::where(['userId' => $userId])->all();
+            $resourcesModel = Resource::where(['userId' => $userId])->get();
             if (empty($resourcesModel)) return false;
 
             // 遍历增长用户资源
+            $status = true;
             foreach ($resourcesModel as $item) {
-                if ($item->updated == time()) continue;
-                $timeLength = time() - $item->updated;
+                if (strtotime($item->updated) == time()) continue;
+                $timeLength = time() - strtotime($item->updated);
 
-                $item->peopleHas = $item->peopleHas + $item->peopleBorn * self::TIME_RATE * $timeLength;
-                $item->peopleVoid = $item->peopleVoid + $item->peopleBorn * self::TIME_RATE * $timeLength;
-                $item->foodHas = $item->foodHas + $item->foodBorn * self::TIME_RATE * $timeLength;
-                $item->moneyHas = $item->moneyHas + $item->moneyBorn * self::TIME_RATE * $timeLength;
-                $item->woodHas = $item->woodHas + $item->woodBorn * self::TIME_RATE * $timeLength;
+                $item->peopleHas += ceil($item->peopleBorn * self::TIME_RATE * $timeLength);
+                if ($item->peopleDepot < $item->peopleHas) {
+                    $overstep = $item->peopleHas;
+                    $item->peopleHas = $item->peopleDepot;
+                    $item->peopleVoid += $overstep - $item->peopleDepot;
+                } else {
+                    $item->peopleVoid += $item->peopleBorn * self::TIME_RATE * $timeLength;
+                }
+                $item->peopleBorn = $item->peopleHas * self::FERTILITY_RATE;
+
+
+                $item->foodHas += ceil($item->foodBorn * self::TIME_RATE * $timeLength);
+                $item->moneyHas += ceil($item->moneyBorn * self::TIME_RATE * $timeLength);
+                $item->woodHas += ceil($item->woodBorn * self::TIME_RATE * $timeLength);
 
                 if(!$item->save()) {
                     $status = false;
@@ -52,7 +63,8 @@ class ResourceService
             return false;
         } catch (\Exception $e) {
             DB::rollBack();
-            echo '意外错误(Unexpected error)：Resource.001';
+//            echo '意外错误(Unexpected error)：Resource.001e';
+            echo $e->getMessage();
         }
 
         return true;

@@ -22,7 +22,7 @@ class CreateResourcesTable extends Migration
             $table->unsignedBigInteger('peopleVoid')->default(10); # 人口闲量
             $table->unsignedBigInteger('areaVoid')->default(0); # 面积闲量
 
-            $table->mediumInteger('peopleBorn')->default(0); # 人口产出
+            $table->float('peopleBorn')->default(0); # 人口产出
             $table->mediumInteger('foodBorn')->default(0); # 粮食产出
             $table->mediumInteger('moneyBorn')->default(0); # 金钱产出
             $table->mediumInteger('woodBorn')->default(0); # 木材产出
@@ -32,7 +32,7 @@ class CreateResourcesTable extends Migration
             $table->unsignedBigInteger('moneyHas')->default(0); # 金钱存量
             $table->unsignedBigInteger('woodHas')->default(0); # 木材存量
 
-//            $table->unsignedBigInteger('peopleDepot')->default(0); # 人口容量
+            $table->unsignedBigInteger('peopleDepot')->default(15); # 人口容量
 //            $table->unsignedBigInteger('foodDepot')->default(0); # 粮食容量
 //            $table->unsignedBigInteger('woodDepot')->default(0); # 木材容量
 

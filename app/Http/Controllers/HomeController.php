@@ -3,17 +3,22 @@
 namespace App\Http\Controllers;
 
 use App\Services\InitService;
+use App\Services\ResourceService;
 use App\System;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
+    protected $resourceService;
+
     /**
      * HomeController constructor.
+     * @param ResourceService $resourceService
      */
-    public function __construct()
+    public function __construct(ResourceService $resourceService)
     {
         $this->middleware('auth');
+        $this->resourceService = $resourceService;
     }
 
     /**
@@ -28,6 +33,7 @@ class HomeController extends Controller
 
     public function registerInfo()
     {
+        $this->resourceService->automatic();
         $data = System::where('category', 'country')
             ->orWhere('category', 'religion')
             ->get();
